@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Slf4j
-public class DeleteCartScheduler {
+public class CartScheduler {
 
     @Autowired
     private CartRepository cartRepository;
@@ -23,7 +24,7 @@ public class DeleteCartScheduler {
 
     @Scheduled(fixedDelayString = "${cart.scheduler.delay}" )
     public void execute() {
-        if (isEnabled) {
+        if (!isEnabled) {
             log.info("Scheduled task is disabled");
             return;
         }
@@ -39,9 +40,10 @@ public class DeleteCartScheduler {
     }
 
     private boolean isExpired(Cart cart) {
-        return cart.getCreationDate()
-                .plusMinutes(expiresInMinutes)
-                .isBefore(LocalDateTime.now());
+        LocalDateTime date = Objects.nonNull(cart.getModificationDate())
+                             ? cart.getModificationDate()
+                             : cart.getCreationDate();
+        return date.plusMinutes(expiresInMinutes).isBefore(LocalDateTime.now());
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.onebox.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 /**
@@ -23,6 +26,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Cart {
 
     @Id
@@ -33,9 +38,16 @@ public class Cart {
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
+    @Column(name = "modification_date")
+    private LocalDateTime modificationDate;
+
     @PrePersist
     public void prePersist() {
         creationDate = LocalDateTime.now();
     }
 
+    @PreUpdate
+    public void preUpdate() {
+        modificationDate = LocalDateTime.now();
+    }
 }

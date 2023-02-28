@@ -13,16 +13,4 @@ public class MessageUtils {
                 .getMessage(key, null, Locale.ENGLISH);
     }
 
-    public static String getMessage(String key, Locale lang) {
-        return ContextWrapper.getContext().getMessage(key, null, lang);
-    }
-
-    public static String getMessage(String key, String... args) {
-        return ContextWrapper.getContext().getMessage(key, args, Locale.ENGLISH);
-    }
-
-    public static String getMessage(String key, Locale lang, String... args) {
-        return ContextWrapper.getContext().getMessage(key, args, lang);
-    }
-
 }

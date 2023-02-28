@@ -20,9 +20,4 @@ public class MessageConfiguration {
         return messageSource;
     }
 
-    @Bean
-    public static MessageUtils messageI18NUtils() {
-        return new MessageUtils();
-    }
-
 }

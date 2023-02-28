@@ -2,8 +2,8 @@ package com.example.onebox.controller;
 
 import com.example.onebox.controller.dto.CartItemRequest;
 import com.example.onebox.controller.dto.CartResponse;
-import com.example.onebox.domain.Cart;
 import com.example.onebox.service.CartService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Api(value = "Cart API", consumes = "application/json", produces = "application/json", tags = "Cart API")
 @RestController
 @RequestMapping("/cart")
 public class CartController {
